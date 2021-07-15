@@ -34,4 +34,10 @@ public class PostsService {
                 (()->new IllegalArgumentException("해당 게시글이 없습니다. id="+id));
         return new PostsResponseDto(entity);
     }
+    @Transactional(readOnly = true)
+    public List<PostsListResponseDto> findAllDesc(){
+        return postsRepository.findAllDesc().stream()
+                .map(PostsListResponseDto::noew)
+                .collect(Collectors.toList());
+    }
 }
